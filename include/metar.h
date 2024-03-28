@@ -1,4 +1,5 @@
 #include <Arduino.h>
-#include <ArduinoJson.h>
-String getMetarJson();
-JsonObject getDeserializedMetar( String metarString);
+#include <vector>
+
+std::string getMetarString( std::string icaoId );
+std::vector<double> parseMetar( std::string metarString );

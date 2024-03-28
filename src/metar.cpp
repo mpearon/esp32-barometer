@@ -1,28 +1,49 @@
 #include <HTTPClient.h>
-#include <ArduinoJson.h>
-JsonDocument json;
-String getMetarJson(){
+#include <regex>
+#include <vector>
+
+std::string getMetarString(){
   	HTTPClient http;
 	Serial.println("[HTTP] GET...]");
-	http.begin("https://aviationweather.gov/api/data/metar?ids=KMKC&format=json&taf=false");
+	http.begin("https://aviationweather.gov/api/data/metar?format=raw&taf=false&ids=KMKC");
 	int httpCode = http.GET();
-	// httpCode will be negative on error
 	if(httpCode > 0){
-		// HTTP header has been send and Server response header has been handled
 		Serial.printf("[HTTP] GET... code: %d\n", httpCode);
-		// file found at server
 		if(httpCode == HTTP_CODE_OK) {
-			String payload = http.getString();
+			std::string payload = (http.getString()).c_str();
 			return (payload);
+		}
+		else{
+			return ( "FAIL1 A2601 30/00" );
 		}
 	}
 	else{
-		Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+		return ( "FAIL2 A2602 30/00" );
 	}
 	http.end();
 }
-JsonObject getDeserializedMetar(String metarString){
-	deserializeJson(json, metarString);
-	JsonObject metar = json[0];
-	return metar;
+
+std::vector<double> parseMetar( std::string metarString ){
+	std::vector<double> metarSet = { 0, 0, 0, 0, 0 };
+
+	std::regex metarRegex( "(M?)(\\d{2})/((M?)(\\d{2}))\\sA(\\d{4})" );
+	std::smatch matchStrings;
+	std::regex_search(metarString, matchStrings, metarRegex);
+
+	metarSet[0] = ( std::stod( matchStrings[6].str() ) / 100 );	// Altimeter
+	metarSet[1] = ( std::stod( matchStrings[2].str() ) ); 		// TemperatureC
+	metarSet[2] = ( ( metarSet[2] * 1.8 ) + 32 ); 				// TemperatureF
+	metarSet[3] = ( std::stod( matchStrings[5].str() ) ); 		// DewpointC
+	
+	if( matchStrings[1].str() == "M" ){
+		metarSet[1] = -(metarSet[1]); // Convert TemperatureF to negative
+		metarSet[2] = -(metarSet[2]); // Convert TemperatureC to negative
+	}
+	if( matchStrings[4].str() == "M" ){
+		metarSet[3] = -(metarSet[3]); // DewpointC to negative
+	}
+
+	metarSet[4] = (100.0 * exp((17.625 * metarSet[3]) / (243.04 + metarSet[3])) / exp((17.625 * metarSet[1]) / (243.04 + metarSet[1]))); // Relative Humidity
+
+	return metarSet;
 }
