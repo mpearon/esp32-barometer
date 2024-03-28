@@ -7,6 +7,8 @@ void setup(){
 	Serial.flush();
 	Serial.begin(9600);
 	initWifi();
+
+	
 }
 void loop(){
 	Serial.println("Looping\n");
