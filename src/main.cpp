@@ -3,20 +3,36 @@
 #include <wifi.h>
 #include <vector>
 #include <motor.h>
+#include <storage.h>
 
 void setup(){
 	Serial.flush();
 	Serial.begin(9600);
 	initWifi();
-
-	calibrateStepper();
+	currentBaroStepperPosition = getStoredValue( "barometer", "lastPosition" );
+	Serial.printf( "Current position from storage: %d\n", currentBaroStepperPosition);
+	//calibrateStepper();
 }
 void loop(){
 	Serial.println("Looping\n");
 	delay(10000);
 	std::string metarString = getMetarString( icaoId );
 	Serial.println( metarString.c_str() );
-	Serial.println("Matching\n");
 	std::vector<double> metarSet = parseMetar( metarString );
 	Serial.printf( "Altimeter: %f\nTemperatureC: %f\nTemperatureF: %f\nDewpointC: %f\nHumidity: %f\n", metarSet[0], metarSet[1], metarSet[2], metarSet[3], metarSet[4] ); 
+
+	// Calculate and update stepper position
+	double difference = ( gaugeFloorValues[0] - metarSet[0] ); // Difference between floor Hg and altim Hg
+	double points = ( difference * 10 ); // Convert difference into tenths
+	double steps = ( points * 34.13 ); // Convert to steps
+
+	int stepsToTravel = calculateStepperDistanceToTravel( steps );
+	updateStepperPosition( stepsToTravel, false );
+
+	// Wait 2 minutes
+	uint32_t moment = millis();
+	while (millis() - moment < 120000) {
+		//otaHandler.handle();
+		//yield();
+	}
 }

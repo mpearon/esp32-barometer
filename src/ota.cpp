@@ -1,4 +1,4 @@
-#include <ESPmDNS.h>
+/* #include <ESPmDNS.h>
 #include <ArduinoOTA.h>
 #include <config.h>
 #include <ota.h>
@@ -31,4 +31,4 @@ ArduinoOTAClass initializeOta(){
     });
 
 	return ArduinoOTA;
-}
+} */

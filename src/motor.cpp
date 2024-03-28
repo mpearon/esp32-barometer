@@ -19,12 +19,17 @@ void calibrateStepper(){
 	}
 	digitalWrite( 2, LOW );
 	currentBaroStepperPosition = 0;
+	setStoredValue( "barometer", "lastPosition", currentBaroStepperPosition );
 }
 int calculateStepperDistanceToTravel( int targetPosition ){
 	return ( currentBaroStepperPosition - targetPosition );
 }
 void updateStepperPosition( int steps, bool smooth ){
+	Serial.printf( "Moving stepper: %d", steps);
 	baroStepper.step(-steps);
 	currentBaroStepperPosition = currentBaroStepperPosition + (-steps);
-	setStoredValue( "barometer", "lastPosition", currentBaroStepperPosition );
+	if( steps != 0 ){
+		Serial.printf( "Committing new position to storage: %d", currentBaroStepperPosition);
+		setStoredValue( "barometer", "lastPosition", currentBaroStepperPosition );
+	}
 }
