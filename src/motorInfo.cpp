@@ -7,3 +7,6 @@ StepperMotor::StepperMotor( String name, int steps, int in1Pin, int in2Pin, int 
 void StepperMotor::stepMotor( int steps ){
 	stepperObject.step( steps );
 }
+void StepperMotor::updateLastPosition( int position ){
+	lastPosition = position;
+}

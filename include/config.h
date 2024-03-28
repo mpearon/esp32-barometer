@@ -3,16 +3,18 @@
 
 #include <Arduino.h>
 #include <Stepper.h>
+#include <ArduinoOTA.h>
+#include <ota.h>
 #include <vector>
-//#include <ota.h>
-//#include <ArduinoOTA.h>
 
 extern std::string hostname;
+extern std::string mDnsHostname;
 extern int otaPort;
+extern ArduinoOTAClass otaHandler;
+
 extern std::string icaoId;
 extern std::vector<double_t> gaugeFloorValues;
 extern Stepper baroStepper;
 extern int currentBaroStepperPosition;
-//extern ArduinoOTAClass otaHandler;
 
 #endif

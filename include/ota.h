@@ -1,2 +1,3 @@
-//#include <ArduinoOTA.h>
-//ArduinoOTAClass initializeOta();
+#include <ArduinoOTA.h>
+ArduinoOTAClass initializeOta();
+void initializeMdns();

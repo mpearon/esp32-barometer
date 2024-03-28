@@ -2,6 +2,9 @@
 #include <vector>
 #include <Stepper.h>
 
+std::string hostname = "sensESP-barometer";
+std::string mDnsHostname = "sensESP-baro";
+
 // Define airport by ICAO
 std::string icaoId = "KMKC";
 
