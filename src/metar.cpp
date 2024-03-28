@@ -2,10 +2,12 @@
 #include <regex>
 #include <vector>
 
-std::string getMetarString(){
+std::string getMetarString( std::string icaoId ){
   	HTTPClient http;
 	Serial.println("[HTTP] GET...]");
-	http.begin("https://aviationweather.gov/api/data/metar?format=raw&taf=false&ids=KMKC");
+	std::string urlBase = ("https://aviationweather.gov/api/data/metar?format=raw&taf=false&ids=");
+	std::string url = urlBase + icaoId;
+	http.begin(url.c_str());
 	int httpCode = http.GET();
 	if(httpCode > 0){
 		Serial.printf("[HTTP] GET... code: %d\n", httpCode);
@@ -14,11 +16,11 @@ std::string getMetarString(){
 			return (payload);
 		}
 		else{
-			return ( "FAIL1 A2601 30/00" );
+			return ( "00/00 A2600" );
 		}
 	}
 	else{
-		return ( "FAIL2 A2602 30/00" );
+		return ( "00/00 A2600" );
 	}
 	http.end();
 }

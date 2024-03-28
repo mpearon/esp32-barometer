@@ -2,8 +2,10 @@
 #include <Stepper.h>
 #include <config.h>
 #include <storage.h>
+#include <Arduino.h>
 
 void calibrateStepper(){
+	pinMode( 2, OUTPUT );
 	digitalWrite( 2, HIGH );
 	baroStepper.setSpeed(5);
 	for (int i = 1; i < 4096; i++) {
@@ -12,9 +14,11 @@ void calibrateStepper(){
 		}
 		else{
 			digitalWrite( 2, LOW );
+			currentBaroStepperPosition = 0;
 		}
 	}
 	digitalWrite( 2, LOW );
+	currentBaroStepperPosition = 0;
 }
 int calculateStepperDistanceToTravel( int targetPosition ){
 	return ( currentBaroStepperPosition - targetPosition );
