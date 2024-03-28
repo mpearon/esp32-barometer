@@ -10,3 +10,4 @@ std::vector<double_t> gaugeFloorValues = { 26, 30, 0 };
 
 // Define stepper motor information
 Stepper baroStepper = Stepper( 2048, 19, 18, 5, 17 );
+int currentBaroStepperPosition = 0;
