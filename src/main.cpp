@@ -5,6 +5,7 @@
 #include <motor.h>
 #include <storage.h>
 #include <ota.h>
+#include <stepperMotor.h>
 
 void setup(){
 	Serial.flush();
@@ -15,6 +16,7 @@ void setup(){
 	currentBaroStepperPosition = getStoredValue( "barometer", "lastPosition" );
 	Serial.printf( "[STEPPER] Current position from storage: %d\n", currentBaroStepperPosition);
 	//calibrateStepper();
+	baroStepper.calibrate();
 }
 void loop(){
 	Serial.println("[PROCESS] Looping");
