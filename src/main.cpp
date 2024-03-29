@@ -16,7 +16,9 @@ void setup(){
 	currentBaroStepperPosition = getStoredValue( "barometer", "lastPosition" );
 	Serial.printf( "[STEPPER] Current position from storage: %d\n", currentBaroStepperPosition);
 	//calibrateStepper();
-	baroStepper.calibrate();
+	//baroStepper.calibrate();
+	baroStepper.setSpeed( 10 );
+	baroStepper.step( 1024 );
 }
 void loop(){
 	Serial.println("[PROCESS] Looping");

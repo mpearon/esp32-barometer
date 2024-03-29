@@ -25,6 +25,7 @@ class stepperMotor : public Stepper{
 		bool ccwRotation;
 		void calibrate();
 		void step( int steps );
+		void setSpeed( int speed );
 
 	private:
 		Stepper stepperObject;
