@@ -12,6 +12,6 @@ class stepperMotor: public Stepper{
 		int targetPosition;
 		int maximumStep;
 		int minimumStep;
-}
+};
 
 #endif
