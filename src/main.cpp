@@ -13,8 +13,9 @@ void setup(){
 	initWifi();
 	initializeMdns();
 	initializeOta();
-	currentBaroStepperPosition = getStoredValue( "barometer", "lastPosition" );
+	//currentBaroStepperPosition = getStoredValue( "barometer", "lastPosition" );
 	Serial.printf( "[STEPPER] Current position from storage: %d\n", currentBaroStepperPosition);
+	baroStepper.currentPosition = getStoredValue( ( baroStepper.name ).c_str(), "lastPosition" );
 	baroStepper.calibrate();
 }
 void loop(){
@@ -30,8 +31,13 @@ void loop(){
 	double points = ( difference * 10 ); // Convert difference into tenths
 	double steps = ( points * 34.13 ); // Convert to steps
 
-	int stepsToTravel = calculateStepperDistanceToTravel( steps );
-	updateStepperPosition( stepsToTravel, false );
+	//int stepsToTravel = calculateStepperDistanceToTravel( steps );
+	baroStepper.targetPosition = steps;
+	baroStepper.calculateTravelDistance();
+	//int difference = baroStepper.calculateTravelDistance();
+	Serial.printf( "Steps: %f | Current: %d | Target: %d\n", steps, baroStepper.currentPosition, baroStepper.targetPosition );
+	//updateStepperPosition( stepsToTravel, false );
+	baroStepper.stepToTarget();
 
 	// Wait 2 minutes
 	uint32_t moment = millis();
