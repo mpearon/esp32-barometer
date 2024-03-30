@@ -16,4 +16,4 @@ std::vector<double_t> gaugeFloorValues = { 26, 30, 0 };
 //Stepper baroStepper = Stepper( 2048, 19, 18, 5, 17 );
 int currentBaroStepperPosition = 0;
 
-stepperMotor baroStepper = stepperMotor( "barometer", 0, 0, 0, 2048, false, 2048, 19, 18, 5, 7 );
+stepperMotor baroStepper = stepperMotor( "barometer", 0, 0, 0, 2048, false, 2048, 19, 18, 5, 17 );

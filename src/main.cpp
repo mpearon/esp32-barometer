@@ -15,10 +15,7 @@ void setup(){
 	initializeOta();
 	currentBaroStepperPosition = getStoredValue( "barometer", "lastPosition" );
 	Serial.printf( "[STEPPER] Current position from storage: %d\n", currentBaroStepperPosition);
-	//calibrateStepper();
-	//baroStepper.calibrate();
-	baroStepper.setSpeed( 10 );
-	baroStepper.step( 1024 );
+	baroStepper.calibrate();
 }
 void loop(){
 	Serial.println("[PROCESS] Looping");

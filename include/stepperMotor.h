@@ -12,10 +12,13 @@ class stepperMotor : public Stepper{
 		: Stepper( steps, inPin1, inPin2, inPin3, inPin4 )
 		, name( name )
 		, currentPosition( currentPosition )
+		, targetPosition( targetPosition )
 		, minimumStep( minimumStep )
 		, maximumStep( maximumStep )
 		, ccwRotation( ccwRotation )
-		, stepperObject( Stepper( steps, inPin1, inPin2, inPin3, inPin4 )  ){}
+		, stepperObject( steps, inPin1, inPin2, inPin3, inPin4 ){
+			Stepper( steps, inPin1, inPin2, inPin3, inPin4 );
+		}
 
 		String name;
 		int currentPosition;
