@@ -9,7 +9,6 @@
 #include <stepperMotor.h>
 
 extern std::string hostname;
-extern std::string mDnsHostname;
 extern int otaPort;
 extern ArduinoOTAClass otaHandler;
 
