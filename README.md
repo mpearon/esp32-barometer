@@ -15,16 +15,29 @@ I'm not familiar with the beast that is `C++`, so please don't make fun of any
 of the incredibly stupid and/or inefficient mistakes I'm going to make.  We all
 benefit from watching someone else learning out loud. Wheels up!
 
-## The Parts List
+## The Execution
+
+The first challenge for every project is sorting scope. "What exactly am I
+trying to accomplish?"  I never know...and let's be honest with ourselves - with
+a personal project like this - who ever knows?  Don't fib...you don't know
+either.  
+
+Usually I start with an idea and then it balloons into a monstrosity.  This time
+the scope was *pretty much* limited by the hardware.  There are three needles
+and they need to point to the right numbers.  Simple, yeah?
+
+Now, the observant read will have noticed that the words "pretty much" were
+italicized. Why would that be? **Scope creeps happens to the best of us.** More
+on that in another branch.
+
+### The Parts List
 
 - [ESP32](https://www.microcenter.com/product/613822/inland-esp32-wroom-32d-module)
 - (3) [28BYJ-48 Stepper Motors](https://www.microcenter.com/product/639726/inland-ks0327-keyestudio-stepper-motor-drive-board-5v-stepper-motor-kit-(3pcs))
 - (3) [ULN-2003 Stepper Motor Controllers](https://www.microcenter.com/product/639726/inland-ks0327-keyestudio-stepper-motor-drive-board-5v-stepper-motor-kit-(3pcs))
-- An old barometer
+- [An old barometer](https://www.that70sshopyakima.com/listing/1268346745/taylor-bakelite-barometer-thermometer)
 
-## The Execution
-
-## The To-do List
+### The To-do List
 
 - [X] Acquire METAR
 - [X] Parse METAR
@@ -33,12 +46,12 @@ benefit from watching someone else learning out loud. Wheels up!
 - [X] Build barometer stepper homing mechanism
 - [X] Commit last barometer stepper position to permanent storage
 - [ ] Drive temperature stepper to position using `temp`
-- [ ] Build temperature stepper homing mechanism
-- [ ] Commit last temperature stepper position to permanent storage
+- [X] Build temperature stepper homing mechanism
+- [X] Commit last temperature stepper position to permanent storage
 - [ ] Drive humidity stepper to position using `temp` and `dewp`
   - [Meterological Calculator][metCalc]
-- [ ] Build humidity stepper homing mechanism
-- [ ] Commit last humidity stepper position to permanent storage
+- [X] Build humidity stepper homing mechanism
+- [X] Commit last humidity stepper position to permanent storage
 - [ ] Build web-based configuration options
   - [ ] Airport selection
   - [ ] Consolidated Stepper Homing
