@@ -39,6 +39,14 @@ void loop(){
 	//updateStepperPosition( stepsToTravel, false );
 	baroStepper.stepToTarget();
 
+	// Temperature
+	double tempDifference = ( gaugeFloorValues[1] - metarSet[2] ); // Difference between thermometer floor and temperatureF
+	double tempSteps = ( tempDifference * 12.8 ); // Convert to steps
+	tempStepper.targetPosition = tempSteps;
+	tempStepper.calculateTravelDistance();
+	tempStepper.stepToTarget();
+	Serial.printf( "tempSteps: %f | tempCurrent: %d | tempTarget: %d\n", tempSteps, tempStepper.currentPosition, tempStepper.targetPosition );
+
 	// Wait 2 minutes
 	uint32_t moment = millis();
 	while (millis() - moment < 120000) {
