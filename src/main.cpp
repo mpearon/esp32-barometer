@@ -2,7 +2,6 @@
 #include <metar.h>
 #include <wifi.h>
 #include <vector>
-#include <motor.h>
 #include <storage.h>
 #include <ota.h>
 #include <stepperMotor.h>
@@ -13,10 +12,12 @@ void setup(){
 	initWifi();
 	initializeMdns();
 	initializeOta();
-	//currentBaroStepperPosition = getStoredValue( "barometer", "lastPosition" );
-	Serial.printf( "[STEPPER] Current position from storage: %d\n", currentBaroStepperPosition);
 	baroStepper.currentPosition = getStoredValue( ( baroStepper.name ).c_str(), "lastPosition" );
 	baroStepper.calibrate();
+	tempStepper.currentPosition = getStoredValue( ( tempStepper.name ).c_str(), "lastPosition" );
+	tempStepper.calibrate();
+	humidStepper.currentPosition = getStoredValue( ( humidStepper.name ).c_str(), "lastPosition" );
+	humidStepper.calibrate();
 }
 void loop(){
 	Serial.println("[PROCESS] Looping");

@@ -2,7 +2,7 @@
 #include <stepperMotor.h>
 #include <storage.h>
 #include <config.h>
-#include <motor.h>
+#include <stepperMotor.h>
 
 void stepperMotor::step( int steps ){
 	if( this->ccwRotation == true ){
