@@ -34,7 +34,7 @@ std::vector<double> parseMetar( std::string metarString ){
 
 	metarSet[0] = ( std::stod( matchStrings[6].str() ) / 100 );	// Altimeter
 	metarSet[1] = ( std::stod( matchStrings[2].str() ) ); 		// TemperatureC
-	metarSet[2] = ( ( metarSet[2] * 1.8 ) + 32 ); 				// TemperatureF
+	metarSet[2] = ( ( metarSet[1] * 1.8 ) + 32 ); 				// TemperatureF
 	metarSet[3] = ( std::stod( matchStrings[5].str() ) ); 		// DewpointC
 	
 	if( matchStrings[1].str() == "M" ){
