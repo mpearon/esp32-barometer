@@ -5,7 +5,7 @@
 
 void initializeMdns(){
 	Serial.println( "[mDNS] Initialize" );
-	if (!MDNS.begin( mDnsHostname.c_str() )) {
+	if (!MDNS.begin( hostname.c_str() )) {
         Serial.println( "     [mDNS] ERROR: Error setting up mDNS responder" );
         while(1) {
             delay(1000);
@@ -44,6 +44,7 @@ ArduinoOTAClass initializeOta(){
 		else if (error == OTA_END_ERROR) Serial.println("End Failed");
     });
 
+	ArduinoOTA.setHostname( hostname.c_str() );
 	Serial.println( "     [OTA] SUCCESS: Initialized OTA" );
 	return ArduinoOTA;
 }

@@ -10,8 +10,7 @@ void setup(){
 	Serial.flush();
 	Serial.begin(9600);
 	initWifi();
-	initializeMdns();
-	initializeOta();
+	otaHandler.begin();
 	baroStepper.currentPosition = getStoredValue( ( baroStepper.name ).c_str(), "lastPosition" );
 	baroStepper.calibrate();
 	tempStepper.currentPosition = getStoredValue( ( tempStepper.name ).c_str(), "lastPosition" );
@@ -43,7 +42,7 @@ void loop(){
 	// Wait 2 minutes
 	uint32_t moment = millis();
 	while (millis() - moment < 120000) {
-		//otaHandler.handle();
-		//yield();
+		otaHandler.handle();
+		yield();
 	}
 }
