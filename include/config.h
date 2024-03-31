@@ -18,5 +18,7 @@ extern std::vector<double_t> gaugeFloorValues;
 //extern Stepper baroStepper;
 extern int currentBaroStepperPosition;
 extern stepperMotor baroStepper;
+extern stepperMotor tempStepper;
+extern stepperMotor humidStepper;
 
 #endif
