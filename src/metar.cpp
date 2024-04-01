@@ -16,11 +16,11 @@ std::string getMetarString( std::string icaoId ){
 			return (payload);
 		}
 		else{
-			return ( "00/00 A2600" );
+			return ( "M1/M51 A2601" );
 		}
 	}
 	else{
-		return ( "00/00 A2600" );
+		return ( "M1/M51 A2601" );
 	}
 	http.end();
 }
@@ -34,13 +34,11 @@ std::vector<double> parseMetar( std::string metarString ){
 
 	metarSet[0] = ( std::stod( matchStrings[6].str() ) / 100 );	// Altimeter
 	metarSet[1] = ( std::stod( matchStrings[2].str() ) ); 		// TemperatureC
+	if( matchStrings[1].str() == "M" ){
+		metarSet[1] = -(metarSet[1]); // Convert TemperatureC to negative
+	}
 	metarSet[2] = ( ( metarSet[1] * 1.8 ) + 32 ); 				// TemperatureF
 	metarSet[3] = ( std::stod( matchStrings[5].str() ) ); 		// DewpointC
-	
-	if( matchStrings[1].str() == "M" ){
-		metarSet[1] = -(metarSet[1]); // Convert TemperatureF to negative
-		metarSet[2] = -(metarSet[2]); // Convert TemperatureC to negative
-	}
 	if( matchStrings[4].str() == "M" ){
 		metarSet[3] = -(metarSet[3]); // DewpointC to negative
 	}
