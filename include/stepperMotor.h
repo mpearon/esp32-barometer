@@ -16,6 +16,10 @@ class stepperMotor : public Stepper{
 		, minimumStep( minimumStep )
 		, maximumStep( maximumStep )
 		, ccwRotation( ccwRotation )
+		, inPin1( inPin1 )
+		, inPin2( inPin2 )
+		, inPin3 (inPin3 )
+		, inPin4 (inPin4 )
 		, stepperObject( steps, inPin1, inPin2, inPin3, inPin4 ){
 			Stepper( steps, inPin1, inPin2, inPin3, inPin4 );
 		}
@@ -27,6 +31,10 @@ class stepperMotor : public Stepper{
 		int minimumStep;
 		int maximumStep;
 		bool ccwRotation;
+		int inPin1;
+		int inPin2;
+		int inPin3;
+		int inPin4;
 
 		void calibrate();
 		void setSpeed( int speed );
@@ -36,6 +44,7 @@ class stepperMotor : public Stepper{
 	private:
 		Stepper stepperObject;
 		void step( int steps );
+		void setPowerState( bool state );
 };
 
 #endif
