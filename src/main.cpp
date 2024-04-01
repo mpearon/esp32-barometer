@@ -41,7 +41,7 @@ void loop(){
 
 	// Temperature
 	double tempDifference = ( gaugeFloorValues[1] - metarSet[2] ); // Difference between thermometer floor and temperatureF
-	double tempSteps = ( tempDifference * 15.5 ); // Convert to steps
+	double tempSteps = ( tempDifference * 13.83 ); // Convert to steps
 	tempStepper.targetPosition = tempSteps;
 	tempStepper.calculateTravelDistance();
 	tempStepper.stepToTarget();
