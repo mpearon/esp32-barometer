@@ -16,11 +16,11 @@ std::string getMetarString( std::string icaoId ){
 			return (payload);
 		}
 		else{
-			return ( "M1/M51 A2601" );
+			return ( "M01/M17 A2600" );
 		}
 	}
 	else{
-		return ( "M1/M51 A2601" );
+		return ( "M01/M17 A2600" );
 	}
 	http.end();
 }
