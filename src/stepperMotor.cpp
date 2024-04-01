@@ -40,7 +40,7 @@ void stepperMotor::calibrate(){
 	return;
 }
 void stepperMotor::calculateTravelDistance(){
-	this->positionDifference = ( this->currentPosition - this->targetPosition );
+	this->positionDifference = ( abs( this->currentPosition ) - abs( this->targetPosition ) );
 }
 void stepperMotor::stepToTarget(){
 	if( this->positionDifference != 0 ){
