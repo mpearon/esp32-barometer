@@ -39,6 +39,22 @@ void loop(){
 	//updateStepperPosition( stepsToTravel, false );
 	baroStepper.stepToTarget();
 
+	// Temperature
+	double tempDifference = ( gaugeFloorValues[1] - metarSet[2] ); // Difference between thermometer floor and temperatureF
+	double tempSteps = ( tempDifference * 15.5 ); // Convert to steps
+	tempStepper.targetPosition = tempSteps;
+	tempStepper.calculateTravelDistance();
+	tempStepper.stepToTarget();
+	Serial.printf( "tempSteps: %f | tempCurrent: %d | tempTarget: %d\n", tempSteps, tempStepper.currentPosition, tempStepper.targetPosition );
+
+	// Humidity
+	double humidDifference = ( gaugeFloorValues[2] - metarSet[4] ); // Difference between hygrometer floor and rH
+	double humidSteps = ( humidDifference * 11.13 ); // Convert to steps
+	humidStepper.targetPosition = humidSteps;
+	humidStepper.calculateTravelDistance();
+	humidStepper.stepToTarget();
+	Serial.printf( "humidSteps: %f | humidCurrent: %d | humidTarget: %d\n", humidSteps, humidStepper.currentPosition, humidStepper.targetPosition );
+
 	// Wait 2 minutes
 	uint32_t moment = millis();
 	while (millis() - moment < 120000) {
