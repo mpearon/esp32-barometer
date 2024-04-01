@@ -16,8 +16,8 @@ void stepperMotor::setSpeed( int speed ){
 	this->stepperObject.setSpeed( speed );
 }
 void stepperMotor::calibrate(){
+	delay( 2000 );
 	int touchBaseline = touchRead( 15 );
-	delay( 1000 );
 	pinMode( 2, OUTPUT );
 	digitalWrite( 2, HIGH );
 	this->setSpeed( 2 );
