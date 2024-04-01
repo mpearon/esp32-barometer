@@ -21,6 +21,7 @@ void stepperMotor::calibrate(){
 	pinMode( 2, OUTPUT );
 	digitalWrite( 2, HIGH );
 	this->setSpeed( 2 );
+	this->setPowerState( true );
 	for( int i = 1; i < 6144; i++ ){
 		if( touchRead( 15 ) > ( touchBaseline - 4 ) ){
 			this->step( 1 );
@@ -35,17 +36,33 @@ void stepperMotor::calibrate(){
 	}
 	digitalWrite( 2, LOW );
 	this->setSpeed(10);
+	this->setPowerState( false );
 	return;
 }
 void stepperMotor::calculateTravelDistance(){
 	this->positionDifference = ( this->currentPosition - this->targetPosition );
 }
 void stepperMotor::stepToTarget(){
-	for( int i = 0; i < ( abs( this->positionDifference ) ); i++ ){
-		this->step( 1 );
-	}
 	if( this->positionDifference != 0 ){
+		this->setPowerState( true );
+		for( int i = 0; i < ( abs( this->positionDifference ) ); i++ ){
+			this->step( 1 );
+		}
+		this->setPowerState( false );
 		setStoredValue( ( this->name ).c_str(), "lastPosition", this->targetPosition );
 		this->currentPosition = this->targetPosition;
 	}
+}
+void stepperMotor::setPowerState( bool state ){
+	String mode;
+	switch( state ){
+		case true:
+			mode = "HIGH";
+		case false:
+			mode = "LOW";
+	}
+	digitalWrite( this->inPin1, state );
+	digitalWrite( this->inPin2, state );
+	digitalWrite( this->inPin3, state );
+	digitalWrite( this->inPin4, state );
 }
