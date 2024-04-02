@@ -6,10 +6,10 @@
 
 void stepperMotor::step( int steps ){
 	if( this->ccwRotation == true ){
-		this->stepperObject.step( steps );
+		this->stepperObject.step( -steps );
 	}
 	else{
-		this->stepperObject.step( -steps );
+		this->stepperObject.step( steps );
 	}
 }
 void stepperMotor::setSpeed( int speed ){
