@@ -45,9 +45,7 @@ void stepperMotor::calculateTravelDistance(){
 void stepperMotor::stepToTarget(){
 	if( this->positionDifference != 0 ){
 		this->setPowerState( true );
-		for( int i = 0; i < ( abs( this->positionDifference ) ); i++ ){
-			this->step( 1 );
-		}
+		this->step( positionDifference );
 		this->setPowerState( false );
 		setStoredValue( ( this->name ).c_str(), "lastPosition", this->targetPosition );
 		this->currentPosition = this->targetPosition;
