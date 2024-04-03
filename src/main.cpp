@@ -1,6 +1,6 @@
 #include <config.h>
 #include <metar.h>
-#include <wifi.h>
+#include <wifiControl.h>
 #include <vector>
 #include <storage.h>
 #include <ota.h>

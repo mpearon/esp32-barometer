@@ -2,6 +2,7 @@
 #include <WiFi.h>
 #include <secrets.h>
 #include <config.h>
+#include <wifiControl.h>
 
 void initWifi(){
 	WiFi.setHostname( hostname.c_str() );
