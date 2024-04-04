@@ -4,7 +4,7 @@
 
 I was gifted a few old barometers and one of them was broken beyond repair.
 After many months of staring at what was essentially a neat looking paper
-weight, I decided to make it useful again.
+weight, I decided to make it "useful" again.
 
 If you've perused my other repositories, you might have notice an aviation theme
 to some of them - well, surprise!  This one is too.  I'll be polling [the
@@ -17,7 +17,7 @@ benefit from watching someone else learning out loud. Wheels up!
 
 ## The Execution
 
-The first challenge for every project is sorting scope. "What exactly am I
+The first challenge for every project is setting scope. "What exactly am I
 trying to accomplish?"  I never know...and let's be honest with ourselves - with
 a personal project like this - who ever knows?  Don't fib...you don't know
 either.  
@@ -26,8 +26,8 @@ Usually I start with an idea and then it balloons into a monstrosity.  This time
 the scope was *pretty much* limited by the hardware.  There are three needles
 and they need to point to the right numbers.  Simple, yeah?
 
-Now, the observant read will have noticed that the words "pretty much" were
-italicized. Why would that be? **Scope creeps happens to the best of us.** More
+Now, the observant reader will have noticed that the words "pretty much" were
+italicized. Why would that be? **Scope creep happens to the best of us.** More
 on that in another branch.
 
 ### The Parts List
