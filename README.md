@@ -45,10 +45,10 @@ on that in another branch.
 - [X] Drive barometer stepper to position using `altim`
 - [X] Build barometer stepper homing mechanism
 - [X] Commit last barometer stepper position to permanent storage
-- [ ] Drive temperature stepper to position using `temp`
+- [X] Drive temperature stepper to position using `temp`
 - [X] Build temperature stepper homing mechanism
 - [X] Commit last temperature stepper position to permanent storage
-- [ ] Drive humidity stepper to position using `temp` and `dewp`
+- [X] Drive humidity stepper to position using `temp` and `dewp`
   - [Meterological Calculator][metCalc]
 - [X] Build humidity stepper homing mechanism
 - [X] Commit last humidity stepper position to permanent storage
