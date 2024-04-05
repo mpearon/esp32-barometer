@@ -1,36 +1,41 @@
-#ifndef stepperMotor_h
-#define stepperMotor_h
+#ifndef STEPPERMOTOR_H
+#define STEPPERMOTOR_H
 
 #include <Arduino.h>
-#include <Stepper.h>
+#include <AccelStepper.h>
+#include <gauge.h>
 
-class stepperMotor : public Stepper{
-	using Stepper::Stepper;
+class stepperMotor : public AccelStepper{
+	using AccelStepper::AccelStepper;
 
 	public:
-		stepperMotor( String name, int currentPosition, int targetPosition, int minimumStep, int maximumStep, bool ccwRotation, int steps, int inPin1, int inPin2, int inPin3, int inPin4 )
-		: Stepper( steps, inPin1, inPin2, inPin3, inPin4 )
+		stepperMotor( 
+			String name,
+			int inPin1,
+			int inPin2,
+			int inPin3,
+			int inPin4,
+			gauge gaugeObject
+		)
+		: AccelStepper( 4, inPin1, inPin2, inPin3, inPin4 )
 		, name( name )
-		, currentPosition( currentPosition )
-		, targetPosition( targetPosition )
-		, minimumStep( minimumStep )
-		, maximumStep( maximumStep )
-		, ccwRotation( ccwRotation )
+		, currentPosition( 0 )
+		, targetPosition( 0 )
+		, distanceToGo( 0 )
 		, inPin1( inPin1 )
 		, inPin2( inPin2 )
-		, inPin3 (inPin3 )
-		, inPin4 (inPin4 )
-		, stepperObject( steps, inPin1, inPin2, inPin3, inPin4 ){
-			Stepper( steps, inPin1, inPin2, inPin3, inPin4 );
+		, inPin3( inPin3 )
+		, inPin4( inPin4 )
+		, gaugeObject( gaugeObject )
+		, stepperObject( 4, inPin1, inPin2, inPin3, inPin4 ){
+			AccelStepper( 4, inPin1, inPin2, inPin3, inPin4 );
 		}
 
 		String name;
 		int currentPosition;
 		int targetPosition;
 		int positionDifference;
-		int minimumStep;
-		int maximumStep;
-		bool ccwRotation;
+		int distanceToGo;
 		int inPin1;
 		int inPin2;
 		int inPin3;
@@ -38,13 +43,13 @@ class stepperMotor : public Stepper{
 
 		void calibrate();
 		void setSpeed( int speed );
-		void stepToTarget();
 		void calculateTravelDistance();
+		void setPowerState( bool state );
+		void stepToTarget();
 
 	private:
-		Stepper stepperObject;
-		void step( int steps );
-		void setPowerState( bool state );
+		AccelStepper stepperObject;
+		gauge gaugeObject;
 };
 
 #endif
