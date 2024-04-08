@@ -19,15 +19,15 @@ void stepperMotor::calibrate(){
 		}
 		else{
 			this->distanceToGo = 0;
+			this->currentPosition = 0;
+			this->targetPosition = 0;
+			this->calculateTravelDistance();
+			setStoredValue( (this->name).c_str(), "lastPosition", 0 );
 		}
 	}
 	this->stepperObject.stop();
 	this->setPowerState( false );
 	digitalWrite( 2, LOW );
-	this->currentPosition = 0;
-	this->targetPosition = 0;
-	this->calculateTravelDistance();
-	setStoredValue( (this->name).c_str(), "lastPosition", 0 );
 	return;
 }
 void stepperMotor::setSpeed( int speed ){
