@@ -8,6 +8,7 @@ void stepperMotor::calibrate(){
 	int touchBaseline = touchRead( 15 );
 	pinMode( 2, OUTPUT );
 	digitalWrite( 2, HIGH );
+	int originalPosition = this->currentPosition;
 	this->currentPosition = 0;
 	this->targetPosition = 6144;
 	this->calculateTravelDistance();
@@ -22,12 +23,13 @@ void stepperMotor::calibrate(){
 			this->currentPosition = 0;
 			this->targetPosition = 0;
 			this->calculateTravelDistance();
-			setStoredValue( (this->name).c_str(), "lastPosition", 0 );
+			originalPosition = 0;
 		}
 	}
 	this->stepperObject.stop();
 	this->setPowerState( false );
-	this->currentPosition = getStoredValue( ( this->name).c_str(), "lastPosition" );
+	digitalWrite( 2, LOW );
+	this->currentPosition = originalPosition;
 	this->targetPosition = this->currentPosition;
 	this->distanceToGo = 0;
 	this->calculateTravelDistance();
