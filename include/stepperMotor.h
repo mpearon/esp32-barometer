@@ -45,7 +45,7 @@ class stepperMotor : public AccelStepper{
 		void setSpeed( int speed );
 		void calculateTravelDistance();
 		void setPowerState( bool state );
-		void stepToTarget();
+		void stepToTarget( bool recordPosition );
 
 	private:
 		AccelStepper stepperObject;
