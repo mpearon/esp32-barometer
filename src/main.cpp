@@ -67,13 +67,13 @@ void loop(){
 		|| ( humidStepper.distanceToGo != 0 )
 	){
 		baroStepper.setSpeed(200);
-		baroStepper.stepToTarget();
+		baroStepper.stepToTarget( true );
 
 		tempStepper.setSpeed(200);
-		tempStepper.stepToTarget();
+		tempStepper.stepToTarget( true );
 
 		humidStepper.setSpeed(200);
-		humidStepper.stepToTarget();
+		humidStepper.stepToTarget( true );
 	}
 
 	baroStepper.setPowerState( false );
